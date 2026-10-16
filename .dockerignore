@@ -1,0 +1,10 @@
+.venv
+.git
+__pycache__
+*.pyc
+.pytest_cache
+data/cache
+models
+eval/report.json
+eval/questions.smoke.json
+tests

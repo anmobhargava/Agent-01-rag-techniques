@@ -1,0 +1,29 @@
+name: deploy to Hugging Face Space
+# Manual only. Needs: repo secret HF_TOKEN (a write token), repo variables HF_USER and HF_SPACE.
+# Set ANTHROPIC_API_KEY as a SECRET inside the Space's own settings, never in this repository.
+# Also set a monthly spend limit on that Anthropic key: MAX_LIVE_QUESTIONS only caps one browser session.
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the Space folder
+        run: |
+          mkdir space
+          cp -r src data Dockerfile requirements.txt space/
+          rm -rf space/data/cache
+          cp spaces/README.md space/README.md            # the Space needs its own front-matter README
+      - name: Push to the Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USER: ${{ vars.HF_USER }}
+          HF_SPACE: ${{ vars.HF_SPACE }}
+        run: |
+          cd space
+          git init -q -b main
+          git config user.email "ci@users.noreply.github.com" && git config user.name "ci"
+          git add -A && git commit -q -m "Deploy from GitHub Actions"
+          git push --force "https://${HF_USER}:${HF_TOKEN}@huggingface.co/spaces/${HF_USER}/${HF_SPACE}" main

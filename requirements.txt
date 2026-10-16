@@ -1,0 +1,9 @@
+haystack-ai>=3.3,<4
+anthropic-haystack>=7,<8
+qdrant-haystack>=12,<13
+qdrant-client>=1.13
+fastembed>=0.7
+neo4j>=5.26
+gradio>=6,<7
+scikit-learn>=1.5
+numpy>=1.26

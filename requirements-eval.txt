@@ -1,0 +1,9 @@
+# Only for `python eval/run_eval.py --ragas`.
+# ragas 0.4.3 imports a module that newer langchain-community removed, so the langchain 0.3 family is pinned.
+-r requirements.txt
+ragas==0.4.3
+langchain<0.4
+langchain-community<0.4
+langchain-core<0.4
+langchain-openai<0.4
+langchain-text-splitters<0.4
