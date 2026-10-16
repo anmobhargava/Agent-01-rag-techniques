@@ -37,8 +37,3 @@ A semantic cache that will not reuse an answer when the names or numbers differ
 Fine-tuning scripts that train the embedding model and report before and after
 Gradio for the chat app, plus Docker, a Hugging Face Space and CI
 
-Layout
-src/rag_agent/ the agent, techniques, embeddings, cache and graph
-eval/ generate and run an evaluation set
-finetune/ fine-tune the embedding model
-data/docs/ the 14 invented documents
