@@ -4,16 +4,6 @@
 
 So I built 16 retrieval techniques in one repo, all over the same small set of documents, and put an agent on top that picks between them. It decides how much searching a question needs, picks a technique, checks what came back, switches if the results are weak, answers with citations, and checks its own answer. The documents are invented (a snack brand, its campaigns and agencies), so there is no real company data.
 
-## Run it
-
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-export PYTHONPATH=src
-python -m rag_agent.app          # open http://localhost:7860
-```
-
-Set `ANTHROPIC_API_KEY` to let Claude plan, grade and write the answers. Without a key it runs as an offline demo and says so on the page.
 
 ## The 16 techniques
 
@@ -42,14 +32,6 @@ Each one is a short function in `src/rag_agent/techniques.py`. The Compare tab i
 - **Fine-tuning scripts** that train the embedding model and report before and after
 - **Gradio** for the chat app, plus Docker, a Hugging Face Space and CI
 
-## Try it
-
-- Ask "How much did Crunch Time spend?" twice. The second is a cache hit. Then ask about Leaf Local. It is not.
-- Pin Naive, then Contextual, on the same question and compare the first chunk.
-- Ask "hello". It answers without searching.
-- Ask "What is the CEO's favourite colour?" It refuses instead of guessing.
-
-## Layout
 
 - `src/rag_agent/` the agent, techniques, embeddings, cache and graph
 - `eval/` generate and run an evaluation set
